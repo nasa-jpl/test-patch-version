@@ -20,6 +20,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls -al ${{ github.workspace }}
+          ls -al .git/objects
       - name: Add and commit patched files
         uses: Endbug/add-and-commit@v9
         with:
