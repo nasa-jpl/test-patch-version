@@ -10,14 +10,16 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@main
       - run: echo "The old_tag output was ${{ steps.patching.outputs.old_tag }}"
       - run: echo "The new_tag output was ${{ steps.patching.outputs.new_tag }}"
+      - name: List files in the repository
+        run: |
+          ls -al ${{ github.workspace }}
       - name: Add and commit patched files
         uses: Endbug/add-and-commit@v9
         with:
