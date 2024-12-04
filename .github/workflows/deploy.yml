@@ -6,8 +6,6 @@ on:
 jobs:
   checkout-and-patch:
     runs-on: ubuntu-24.04
-    outputs:
-
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
