@@ -20,6 +20,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls -al ${{ github.workspace }}
+          sudo chown runner:docker -R .git
           ls -al .git/objects
       - run: git add CMakeLists.txt
       - name: Add and commit patched files
