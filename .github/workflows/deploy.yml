@@ -10,8 +10,6 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@main
@@ -20,9 +18,8 @@ jobs:
       - name: List files in the repository
         run: |
           ls -al ${{ github.workspace }}
-          sudo chown runner:docker -R .git
+          # sudo chown runner:docker -R .git
           ls -al .git/objects
-      - run: git add CMakeLists.txt
       - name: Add and commit patched files
         uses: Endbug/add-and-commit@v9
         with:
