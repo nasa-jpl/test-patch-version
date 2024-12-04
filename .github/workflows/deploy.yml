@@ -4,8 +4,10 @@ on:
     branches:
       - main
 jobs:
-  patch-and-deploy:
+  checkout-and-patch:
     runs-on: ubuntu-24.04
+    outputs:
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
@@ -14,7 +16,14 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: Patch version information
+        id: patching
         uses: nasa-jpl/patch-version@main
+
+  add-patched-and-commit:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "The output was ${{ steps.patching.outputs.old_tag }}"
+      - run: echo "The output was ${{ steps.patching.outputs.new_tag }}"
       - name: Add and commit patched files
         uses: Endbug/add-and-commit@v9
         with:
