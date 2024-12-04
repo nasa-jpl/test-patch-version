@@ -8,11 +8,17 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: Patch file
+      - name: Patch version information
         uses: nasa-jpl/patch-version@main
+      - name: Add and commit patched files
+        uses: Endbug/add-and-commit@v9
+        with:
+          add: "CMakeLists.txt"
+          author_name: "Dennis Wai"
+          author_email: "Dennis.Wai@jpl.nasa.gov"
+          default_author: github_actions
