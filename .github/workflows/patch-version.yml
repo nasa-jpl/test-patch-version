@@ -1,4 +1,4 @@
-name: deploy
+name: patch-version
 on:
   push:
     branches:
@@ -7,10 +7,8 @@ jobs:
   patch-and-commit:
     runs-on: ubuntu-24.04
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
         uses: actions/checkout@v4 # by default, only fetches one commit
-      - run: echo "The commit message was ${{ github.event.head_commit.message }}"
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@main
@@ -25,4 +23,6 @@ jobs:
         with:
           add: "CMakeLists.txt"
           default_author: github_actions
-          tag: "${{ steps.patching.outputs.new_tag }}"
+          pull: "--rebase"
+          tag: "${{ steps.patching.outputs.new_tag }} --force"
+          tag_push: "--force"
