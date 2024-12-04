@@ -9,10 +9,13 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # by default, only fetches one commit
+      - run: echo "The commit message was ${{ github.event.head_commit.message }}"
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@main
+        with:
+          commit_msg: "${{ github.event.head_commit.message }}"
       - name: Workaround chown to deal with .git/objects owned by root instead of runner
         # Allegedly, this only needs to only be done for small, new repos
         run: |
