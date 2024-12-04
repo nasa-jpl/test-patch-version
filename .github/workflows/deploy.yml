@@ -21,6 +21,7 @@ jobs:
         run: |
           ls -al ${{ github.workspace }}
           ls -al .git/objects
+      - run: git add CMakeLists.txt
       - name: Add and commit patched files
         uses: Endbug/add-and-commit@v9
         with:
