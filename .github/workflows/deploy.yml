@@ -13,9 +13,8 @@ jobs:
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@main
-      - run: echo "The old_tag output was ${{ steps.patching.outputs.old_tag }}"
-      - run: echo "The new_tag output was ${{ steps.patching.outputs.new_tag }}"
       - name: Workaround chown to deal with .git/objects owned by root instead of runner
+        # Allegedly, this only needs to only be done for small, new repos
         run: |
           sudo chown runner:docker -R .git
       - name: Add and commit patched files
@@ -23,3 +22,4 @@ jobs:
         with:
           add: "CMakeLists.txt"
           default_author: github_actions
+          tag: "${{ steps.patching.outputs.new_tag }}"
