@@ -14,6 +14,7 @@ jobs:
         uses: nasa-jpl/patch-version@main
         with:
           commit_msg: "${{ github.event.head_commit.message }}"
+          commit_sha: "${{ github.event.after }}"
       - name: Workaround chown to deal with .git/objects owned by root instead of runner
         # Allegedly, this only needs to only be done for small, new repos
         run: |
