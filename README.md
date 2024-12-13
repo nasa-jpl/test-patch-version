@@ -2,10 +2,6 @@
 
 Repo to test nasa-jpl/patch-version with varying permissions
 
-This is a sentence
-I added another sentence
-I added another sentence
-
 ### One way to bypass master branch protection
 
 How to setup the action to bypass branches protection
