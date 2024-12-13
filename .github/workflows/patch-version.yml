@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4 # by default, only fetches one commit
+        with:
+          ssh-key: ${{ secrets.GHA_DEPLOY_KEY }}
       - name: Patch version information
         id: patching
         uses: nasa-jpl/patch-version@v2
