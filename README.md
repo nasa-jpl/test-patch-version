@@ -1,6 +1,6 @@
 # test-patch-version
 
-Repo to test nasa-jpl/patch-version with varying permissions
+Repo to test nasa-jpl/patch-version with varying branch protections set
 
 ### One way to bypass master branch protection
 
